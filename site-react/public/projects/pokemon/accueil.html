@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="accueil.css"/>
+    <link rel="stylesheet"  href="header_footer.css"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Pokecollect - Accueil</title>
+</head>
+<body>
+    
+    <header id="header">
+        <div>
+            <a href="accueil.html">
+                <img src="./Annexes/Image/logo.png" alt="Logo" class="logo_accueil">
+            </a>
+        </div>
+        
+        <nav>
+            <a href="accueil.html" class="nav_accueil">Accueil</a>
+            <a href="collection.html">Collection</a>
+            <a href="catalogue.html">Catalogue</a>
+        </nav>
+        <div class="user">
+            <span>Bienvenue <span id="bienvenu_login"></span>!</span>
+            <a href="index.html"><button class="logout_button">Se déconnecter</button></a>
+            <img src="Annexes/Image/75_user-circle-512-removebg-preview.png" alt="Profile" class="logo_profile">
+        </div>
+    </header>
+        
+    <div class="grid_accueil"></div>
+        <div class="container">
+            <div class="banner">
+                <img src="Annexes/Image/evolution_prismatique.png" alt="evolutions_prismatiques">
+                <h3 class="texte_accueil_1">Disponible maintenant : Écarlate et Violet - Évolutions Prismatiques du JCC Pokémon</h3>
+                <p class="texte_accueil_2">Faites évoluer votre jeu avec Évoli et ses nombreuses évolutions dans la nouvelle extension du JCC Pokémon.</p>
+            </div>
+        
+            
+        <div class="card_evolution">
+            <div class="card_evolution_img">
+                <img src="img/96px/158.png" alt="Kaiminus">
+                
+                <img src="img/96px/159.png" alt="Crocrodil">
+                
+                <img src="img/96px/160.png" alt="Aligatueur">
+            </div>
+            <div class="card_evolution_txt">
+                <h3>Kaiminus N°158</h3>
+                <h3>Crocodil N°159</h3>
+                <h3>Aligatueur N°160</h3>
+            </div>
+        </div>
+        
+        
+        <div class="card_collectionnez">
+            <img src="Annexes/Image/collectionez_les_tous.png" alt="Collection">
+            <h3>Collectionnez les tous !</h3>
+            <p>Découvrez le classement des meilleures cartes dès maintenant.</p>
+        </div>  
+    </div>
+    <div class="grid_accueil_2">
+        <div class="container_2"></div>
+            <div class="card_populaires">
+                <img src="Annexes/Image/cartes_fond_bleu.png" alt="Cartes populaires" id="classement">
+            </div>
+
+            <div class="card_tcgp">
+                <img src="Annexes/Image/tcgp.png" alt="TCGP" id="tcgp">
+            </div>
+        </div>
+    </div>
+        
+    
+    <footer class="footer">
+        <a href="#">Conditions d'utilisations</a>
+        <a href="#">Service client</a>
+        <a href="#">Contactez-nous</a>
+        <a href="#">FAQ</a>
+        <a href="#">Informations juridiques</a>
+        <a href="#">Avis de confidentialité</a>
+    </footer>
+</body>
+
+
+<script type="text/javascript" src="pokemon_data_v2.js"></script>
+<script type="text/javascript" src="collection.js"></script>
+<script type="text/javascript" src="pokemon_api.js"></script>
+
+<script>
+    var username = localStorage.getItem('username');
+    document.getElementById('bienvenu_login').textContent = username;
+</script>
+
+</html>
