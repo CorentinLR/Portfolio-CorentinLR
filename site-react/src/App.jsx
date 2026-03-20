@@ -12,8 +12,10 @@ function ScrollComponent() {
 }
 
 function App() {
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
+  
   return (
-    <Router basename={import.meta.env.BASE_URL}>
+    <Router basename={basename}>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
