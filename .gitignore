@@ -1,0 +1,29 @@
+# Logs
+site-react/logs
+site-react/*.log
+site-react/npm-debug.log*
+site-react/yarn-debug.log*
+site-react/yarn-error.log*
+site-react/pnpm-debug.log*
+site-react/lerna-debug.log*
+
+# Dependencies
+site-react/node_modules
+
+# Build
+site-react/dist
+site-react/dist-ssr
+
+# Other
+site-react/*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
