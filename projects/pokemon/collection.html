@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="collection.css"/>
+    <link rel="stylesheet"  href="header_footer.css"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Pokecollect - Accueil</title>
+</head>
+<body>
+    
+    <header id="header">
+        <div>
+            <a href="accueil.html">
+                <img src="./Annexes/Image/logo.png" alt="Logo" class="logo_accueil">
+            </a>
+        </div>
+        
+        <nav>
+            <a href="accueil.html">Accueil</a>
+            <a href="collection.html" class="nav_collection">Collection</a>
+            <a href="catalogue.html">Catalogue</a>
+        </nav>
+        <div class="user">
+            <span>Bienvenue <span id="bienvenu_login"></span>!</span>
+            <a href="index.html"><button class="logout_button">Se déconnecter</button></a>
+            <img src="Annexes/Image/75_user-circle-512-removebg-preview.png" alt="Profile" class="logo_profile">
+        </div>
+    </header>
+    
+    <div id="collection_pokemon">
+
+    </div>
+        
+    
+    <footer class="footer">
+        <a href="#">Conditions d'utilisations</a>
+        <a href="#">Service client</a>
+        <a href="#">Contactez-nous</a>
+        <a href="#">FAQ</a>
+        <a href="#">Informations juridiques</a>
+        <a href="#">Avis de confidentialité</a>
+    </footer>
+</body>
+
+
+<script type="text/javascript" src="pokemon_data_v2.js"></script>
+<script type="text/javascript" src="collection.js"></script>
+<script type="text/javascript" src="pokemon_api.js"></script>
+
+<script>
+    var username = localStorage.getItem('username');
+    document.getElementById('bienvenu_login').textContent = username;
+    
+    listAllPokemonFromCollection("collection_pokemon", collectionData, pokemonData);
+</script>
+
+</html>
+
+
+
+
+</html>
+
+

@@ -1,0 +1,99 @@
+/*----------------HEADER----------------*/
+
+#header {
+    background-color: #ffd500;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+header .user {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+header .user span {
+    margin-right: 50px;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+#bienvenu_login {
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.user {
+    margin-left: auto;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    margin: 0 15px;
+}
+
+.nav_accueil{
+    font-size: 30px;
+}
+
+.nav_catalogue{
+    font-size: 30px;
+}
+
+.nav_collection{
+    font-size: 30px;
+}
+
+.logo_accueil{
+    height: 50px;
+    width: 200px;
+    margin-right: 25px;
+}
+
+.logo_profile{
+    height: 50px;
+    width: 50px;
+    margin-left: 10px; 
+    margin-right: 10px;
+}
+
+.logout_button{
+    font-weight: bold;
+    background-color: #f25c54;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout_button:hover{
+    background-color: #dc2b21;
+}
+
+/*----------------FOOTER----------------*/
+
+
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffd500;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    
+}
+
+.footer a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    margin: 0 10px;
+    grid-column: span 3;
+}

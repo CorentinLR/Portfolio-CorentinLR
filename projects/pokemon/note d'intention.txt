@@ -1,0 +1,19 @@
+---------Note d'intention SAE 105---------
+
+Corentin Le Roux 1A1
+
+	Au cours de cette SAE je me suis organisé de sorte à me retrouver par la suite j'ai donc ranger mes fichiers pour qu'ils soits pertinents. 
+Par exemple j'ai créer plusieurs css en fonction de leurs utilisations ou en fonction de la page utilisée.
+Aussi chacunes de mes images sont rangées dans un même fichier annexes. Seul les images des pokémon en 96px et en full son rangée en dehors des autres images.
+
+	Les problèmes principaux que j'ai rencontré au cours de ce projet ont été le javascript que je ne comprenais pas énormément et 
+la disposition des différents éléments en css ou il était difficile de les placer comme je voulais. 
+Du à cette difficulté du javascript ma fonction ajouter à la collection ne fonctionne pas.
+Ensuite mon site peut avoir de sproblème de responsive en fonction de la taille de l'écran utilisé car ça a été difficile de prendre en compte ce paramètre dans le css.
+
+	Pour finir si je devait amméliorer un ou des points dans ma façon de travailler ce serait de ne pas trainer à éssayer les différentes fonctionnalités car à la 
+fin je me suis rendu compte que beaucoup de choses ne fontionnaits pas correctement.
+
+
+
+

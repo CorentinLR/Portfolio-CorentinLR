@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html class="index" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>PokéCollect</title>
+</head>
+
+<header>
+
+</header>
+
+<body id="body_index">
+    <div class="grid-container">
+        <div class="logo">
+            <img src="./Annexes/Image/logo.png" alt="Logo" class="logo-image" height="200">
+        </div>
+        <div class="form-background">
+            <div class="login-form">
+                <form id="loginForm" action="accueil.html" method="post">
+                    <label for="username">Identifiant:</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Mot de passe:</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit" id="button_login">Se connecter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="pokemon_data_v2.js"></script>
+<script type="text/javascript" src="collection.js"></script>
+<script type="text/javascript" src="pokemon_api.js"></script>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        console.log('Identifiant:', username);
+        console.log('Mot de passe:', password);
+        localStorage.setItem('username', username);
+        window.location.href = 'accueil.html';
+    });
+</script>
+</html>

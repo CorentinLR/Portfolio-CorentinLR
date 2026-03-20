@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+html {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fdf6e4;
+    background-image: url(Annexes/Image/pokémon_accueil_sans_fond.png);
+    background-size: 100%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(9, 100px);
+    padding: 5px;
+    text-align: center;
+  }
+
+.grid_boutons{
+    grid-row: 8/9;
+    align-content: center;
+}
+
+.logo{
+    grid-row: 2/3;
+
+}
+
+.button {
+    background-color: #ffd700;
+    border: none;
+    padding: 0px 20px;
+    font-weight: bold;
+    color: black;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 8px;
+    box-shadow: 0 9px #ad8800;
+}
+
+.boutons_accueil{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.button:hover {
+    background-color: #ffc700;
+}
+
+.button:active {
+    background-color: #ffc700;
+    box-shadow: 0 5px #6d5500;
+    transform: translateY(4px);
+}
