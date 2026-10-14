@@ -9,8 +9,8 @@ function Projets() {
                 <h1 id="titre_projets">MES RÉALISATIONS</h1>
 
                 <div className="project-grid">
-                    <a href="javascript:void(0)" className="project-card" data-bs-toggle="modal" data-bs-target="#modalArches">
-                        <img src="/image/Arches-modified.webp" alt="Arches" loading="lazy" className="project-card-img" />
+                    <a href="javascript:void(0)" id="card_arches" className="project-card" data-bs-toggle="modal" data-bs-target="#modalArches">
+                        <img src={import.meta.env.BASE_URL + "image/Arches-modified.webp"} alt="Arches" loading="lazy" className="project-card-img" />
                         <div className="project-overlay">
                             <div className="project-info">
                                 <span className="project-category">COMMUNICATION</span>
@@ -19,8 +19,8 @@ function Projets() {
                             <i className="fa-solid fa-file-lines project-icon"></i>
                         </div>
                     </a>
-                    <a href="javascript:void(0)" className="project-card" data-bs-toggle="modal" data-bs-target="#modalFilm">
-                        <img src="/image/la_derniere_presence-modified.png" alt="Film" loading="lazy" className="project-card-img" />
+                    <a href="javascript:void(0)" id="card_film" className="project-card" data-bs-toggle="modal" data-bs-target="#modalFilm">
+                        <img src={import.meta.env.BASE_URL + "image/la_derniere_presence-modified.png"} alt="Film" loading="lazy" className="project-card-img" />
                         <div className="project-overlay">
                             <div className="project-info">
                                 <span className="project-category">AUDIOVISUEL</span>
@@ -29,8 +29,8 @@ function Projets() {
                             <i className="fa-solid fa-play project-icon"></i>
                         </div>
                     </a>
-                    <a href="javascript:void(0)" className="project-card" data-bs-toggle="modal" data-bs-target="#modalBeGreen">
-                        <img src="/image/affiche_ODD15-modified.png" alt="Be Green" loading="lazy" className="project-card-img" />
+                    <a href="javascript:void(0)" id="card_begreen" className="project-card" data-bs-toggle="modal" data-bs-target="#modalBeGreen">
+                        <img src={import.meta.env.BASE_URL + "image/affiche_ODD15-modified.png"} alt="Be Green" loading="lazy" className="project-card-img" />
                         <div className="project-overlay">
                             <div className="project-info">
                                 <span className="project-category">GESTION DE PROJET</span>
@@ -79,10 +79,10 @@ function Projets() {
                                     </div>
 
                                     <div className="text-center d-flex flex-wrap justify-content-center gap-2">
-                                        <a href="/image/pdf/Doc_ArchesPapers.pdf" target="_blank" rel="noopener noreferrer" className="btn-modal-action">
+                                        <a href={import.meta.env.BASE_URL + "image/pdf/Doc_ArchesPapers.pdf"} target="_blank" rel="noopener noreferrer" className="btn-modal-action">
                                             Ouvrir le document <i className="fa-solid fa-file-pdf ms-2"></i>
                                         </a>
-                                        <a href="/image/pdf/Diapo_ArchesPapers.pdf" target="_blank" rel="noopener noreferrer" className="btn-modal-action">
+                                        <a href={import.meta.env.BASE_URL + "image/pdf/Diapo_ArchesPapers.pdf"} target="_blank" rel="noopener noreferrer" className="btn-modal-action">
                                             Voir le diaporama <i className="fa-solid fa-file-powerpoint ms-2"></i>
                                         </a>
                                     </div>
@@ -157,19 +157,19 @@ function Projets() {
                                     </div>
 
                                     <div className="text-center d-flex flex-wrap justify-content-center gap-2">
-                                        <a href="/image/affiche_ODD15.png" target="_blank" rel="noopener noreferrer" className="btn-modal-action">
+                                        <a href={import.meta.env.BASE_URL + "image/affiche_ODD15.png"} target="_blank" rel="noopener noreferrer" className="btn-modal-action">
                                             Voir l'affiche <i className="fa-solid fa-image ms-2"></i>
                                         </a>
-                                        <a href="/image/pdf/Cahier_des_charges.pdf" target="_blank" rel="noopener noreferrer" className="btn-modal-action">
+                                        <a href={import.meta.env.BASE_URL + "image/pdf/Cahier_des_charges.pdf"} target="_blank" rel="noopener noreferrer" className="btn-modal-action">
                                             Cahier des charges <i className="fa-solid fa-file-invoice ms-2"></i>
                                         </a>
-                                        <a href="/image/pdf/Resume_projet.pdf" target="_blank" rel="noopener noreferrer" className="btn-modal-action">
+                                        <a href={import.meta.env.BASE_URL + "image/pdf/Resume_projet.pdf"} target="_blank" rel="noopener noreferrer" className="btn-modal-action">
                                             Résumé du projet <i className="fa-solid fa-file-lines ms-2"></i>
                                         </a>
-                                        <a href="/image/pdf/Fiche_etat-des-lieux.pdf" target="_blank" rel="noopener noreferrer" className="btn-modal-action">
+                                        <a href={import.meta.env.BASE_URL + "image/pdf/Fiche_etat-des-lieux.pdf"} target="_blank" rel="noopener noreferrer" className="btn-modal-action">
                                             Fiche état des lieux <i className="fa-solid fa-clipboard-list ms-2"></i>
                                         </a>
-                                        <a href="/image/pdf/Fiche_idee.pdf" target="_blank" rel="noopener noreferrer" className="btn-modal-action">
+                                        <a href={import.meta.env.BASE_URL + "image/pdf/Fiche_idee.pdf"} target="_blank" rel="noopener noreferrer" className="btn-modal-action">
                                             Fiche idée <i className="fa-solid fa-lightbulb ms-2"></i>
                                         </a>
                                     </div>

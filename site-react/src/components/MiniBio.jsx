@@ -7,7 +7,7 @@ function MiniBio() {
                 <div className="col-md-5 d-flex justify-content-center align-items-center mb-4 mb-md-0">
                     <div className="bio-photo-wrapper">
                         <img
-                            src="/image/mini-bio4.jpg"
+                            src={import.meta.env.BASE_URL + "image/mini-bio-corentin.jpg"}
                             className="img-fluid bio-photo"
                             alt="Corentin Le Roux"
                             id="photo_mini_bio"
@@ -19,7 +19,7 @@ function MiniBio() {
                         <h2 className="mb-4">Salut ! <span className="wave">👋</span></h2>
 
                         <p className="bio-paragraph">
-                            Moi c'est <b>Corentin</b>, j’ai 20 ans, je suis un étudiant de <span className="highlight-text">BUT MMI</span> et comme le dit mon nom je suis roux ! Marrant non ?
+                            Moi c'est <b>Corentin</b>, j’ai 21 ans, je suis un étudiant de <span className="highlight-text">BUT MMI</span> et comme le dit mon nom je suis roux ! Marrant non ?
                         </p>
 
                         <p className="bio-paragraph">

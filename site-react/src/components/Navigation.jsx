@@ -100,9 +100,9 @@ function Navigation() {
             <div id="logo_clr" className={`${isBlueLogo ? 'logo-blue' : ''} ${isOpen ? 'menu-open' : ''}`}>
                 <Link to="/" onClick={() => { window.scrollTo(0, 0); closeMenu(); }}>
                     {/* Image Blanche (Visible par défaut) */}
-                    <img src="/image/logo_CLR2_blanc.png" className="logo-img white" alt="Logo" />
+                    <img src={import.meta.env.BASE_URL + "image/logo_CLR2_blanc.png"} className="logo-img white" alt="Logo" />
                     {/* Image Bleue (Visible quand .logo-blue est actif) */}
-                    <img src="/image/logo_CLR2_blanc.png" className="logo-img blue" alt="Logo" />
+                    <img src={import.meta.env.BASE_URL + "image/logo_CLR2_blanc.png"} className="logo-img blue" alt="Logo" />
                 </Link>
             </div>
         </>
