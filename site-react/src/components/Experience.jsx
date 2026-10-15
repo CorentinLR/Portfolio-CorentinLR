@@ -38,16 +38,23 @@ function Experience() {
             >
                 <motion.div className="experience-card" variants={itemVariants}>
                     <div className="card-decoration"></div>
-                    <div className="date-badge">2019</div>
-                    <h2 className="experience-title">Stage 3ème - Volkswagen</h2>
-                    <p className="experience-description">Découverte des métiers de la mécanique automobile.</p>
+                    <div className="date-badge">2026</div>
+                    <h2 className="experience-title">Stage professionnel - Startup Aerosolution</h2>
+                    <p className="experience-description">Chargé de Communication et Marketing.</p>
+                </motion.div>
+
+                <motion.div className="experience-card" variants={itemVariants}>
+                    <div className="card-decoration"></div>
+                    <div className="date-badge">2026</div>
+                    <h2 className="experience-title">Emploi saisonnier - Mediaposte</h2>
+                    <p className="experience-description">Agent de production dans un centre de tri.</p>
                 </motion.div>
 
                 <motion.div className="experience-card" variants={itemVariants}>
                     <div className="card-decoration"></div>
                     <div className="date-badge">2024</div>
                     <h2 className="experience-title">Emploi saisonnier - Agent de courrier</h2>
-                    <p className="experience-description">Tri et livraison de colis. Travail de nuit et d'équipe.</p>
+                    <p className="experience-description">Tri et livraison de colis. Travail d'équipe.</p>
                 </motion.div>
             </motion.div>
         </div>
