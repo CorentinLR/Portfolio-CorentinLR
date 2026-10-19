@@ -279,30 +279,209 @@ a {
     animation: float 4s ease-in-out infinite;
 }
 
-/* Styles Mini Bio Améliorés */
+/* ============================================================
+   MINI-BIO : PHOTO DE PROFIL & ÉMOJIS SANS FOND / DISPERSION ALÉATOIRE
+   ============================================================ */
 .bio-photo-wrapper {
     position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     padding: 0;
     transition: transform 0.5s ease;
     animation: float 6s ease-in-out infinite;
+    cursor: pointer;
+    user-select: none;
 }
 
-/* ... existing bio styles ... */
-.bio-photo {
+/* Zone invisible de survol élargie couvrant tous les émojis même très écartés */
+.bio-photo-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     border-radius: 50%;
+    z-index: 1;
+    pointer-events: auto;
+    transition: inset 0.2s ease;
+}
+
+.bio-photo-wrapper:hover::before,
+.bio-photo-wrapper.active::before {
+    inset: -60px; /* Calé précisément sur le contour extérieur des émojis */
+}
+
+.bio-photo {
+    border-radius: 50% !important;
     width: 350px;
     height: 350px;
     object-fit: cover;
-    transition: all 0.5s ease;
-    border: 5px solid white;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 5px solid #ffffff;
+    box-shadow: 0 15px 35px rgba(20, 48, 104, 0.15);
+    position: relative;
+    z-index: 2;
 }
 
-.bio-photo-wrapper:hover {
-    transform: translateY(-10px) scale(1.02);
+#photo_mini_bio {
+    border-radius: 50% !important;
 }
 
-.bio-photo-wrapper:hover .bio-photo {
-    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+.bio-photo-wrapper:hover,
+.bio-photo-wrapper.active {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.bio-photo-wrapper:hover .bio-photo,
+.bio-photo-wrapper.active .bio-photo {
+    box-shadow: 0 20px 45px rgba(59, 130, 246, 0.3), 0 0 25px rgba(59, 130, 246, 0.15);
+    border-color: #dbeafe;
+}
+
+/* Conteneur d'émojis jaillissants */
+.bio-emojis-scatter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Chaque émoji individuel : STRICTEMENT SANS FOND NI CONTOUR */
+.bio-emoji-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.35s ease,
+                visibility 0.35s ease;
+    pointer-events: none;
+    z-index: 6;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Jaillissement dynamique en nuage aléatoire au survol */
+.bio-photo-wrapper:hover .bio-emoji-item,
+.bio-photo-wrapper.active .bio-emoji-item {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1) rotate(var(--rot, 0deg));
+    pointer-events: auto;
+    transition-delay: var(--delay, 0s);
+}
+
+/* Le glyphe émoji pur (aucun rond, aucun bord) */
+.bio-emoji-item .emoji-glyph {
+    font-size: var(--size, 2.2rem);
+    line-height: 1;
+    display: inline-block;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+    animation: emojiFloatAnim var(--anim-dur, 3.5s) ease-in-out infinite;
+    animation-delay: var(--anim-delay, 0s);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+        filter 0.25s ease;
+}
+
+/* Réaction au survol direct d'un émoji */
+.bio-emoji-item:hover .emoji-glyph {
+    transform: scale(1.35) rotate(calc(var(--rot, 0deg) * -1.2));
+    filter: drop-shadow(0 8px 18px rgba(59, 130, 246, 0.5));
+}
+
+/* Petite étiquette tooltip au survol d'un émoji */
+.bio-emoji-item .emoji-tooltip {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 4px);
+    transform: translateX(-50%) translateY(-4px);
+    background: #143068;
+    color: #ffffff;
+    padding: 3px 9px;
+    border-radius: 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    box-shadow: 0 6px 18px rgba(20, 48, 104, 0.25);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 10;
+}
+
+.bio-emoji-item .emoji-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px;
+    border-style: solid;
+    border-color: transparent transparent #143068 transparent;
+}
+
+.bio-emoji-item:hover .emoji-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Flottement organique libre des émojis */
+@keyframes emojiFloatAnim {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Petite pastille discrète "✨ Survolez-moi" */
+.bio-hover-hint {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: var(--accent);
+    padding: 3px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    z-index: 3;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.bio-photo-wrapper:hover .bio-hover-hint,
+.bio-photo-wrapper.active .bio-hover-hint {
+    opacity: 0;
+    transform: translateX(-50%) translateY(6px);
 }
 
 .bio-paragraph {
@@ -1047,6 +1226,43 @@ a {
     box-shadow: 0 20px 40px rgba(20, 48, 104, 0.4);
 }
 
+/* Bouton Retour */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 22px;
+    border-radius: 50px;
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--accent) !important;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none !important;
+    margin-bottom: 10px;
+}
+
+.btn-back:hover {
+    background: var(--accent);
+    color: white !important;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+.btn-back i {
+    transition: transform 0.3s ease;
+}
+
+.btn-back:hover i {
+    transform: translateX(-4px);
+}
+
 /* ========================
    8. SAVOIR-FAIRE & CONTACT
    ======================== */
@@ -1314,13 +1530,15 @@ a {
 
 /* Mobile Devices */
 @media (max-width: 768px) {
+
     /* Navigation Adjustments */
     #logo_clr {
         top: 20px;
         left: 20px;
     }
 
-    #logo_clr a, .logo-img {
+    #logo_clr a,
+    .logo-img {
         height: 60px;
     }
 
@@ -1375,16 +1593,29 @@ a {
     }
 
     /* Grid Resets */
-    .project-grid, 
+    .project-grid,
     .bento-grid {
         grid-template-columns: 1fr;
     }
 
-    /* Bio Section */
+    /* Bio Section Mobile */
+    .bio-photo-wrapper {
+        margin-bottom: 35px;
+    }
+
     .bio-photo {
         width: 250px;
         height: 250px;
-        margin-bottom: 30px;
+        margin-bottom: 0;
+    }
+
+    .bio-emoji-item .emoji-glyph {
+        font-size: calc(var(--size, 2.2rem) * 0.75);
+    }
+
+    .bio-photo-wrapper:hover .bio-emoji-item,
+    .bio-photo-wrapper.active .bio-emoji-item {
+        transform: translate(calc(-50% + var(--tx-mobile)), calc(-50% + var(--ty-mobile))) scale(1) rotate(var(--rot, 0deg));
     }
 
     .bio-paragraph {

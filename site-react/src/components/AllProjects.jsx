@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import Navigation from './Navigation';
 import Contact from './Contact';
 
@@ -183,7 +184,13 @@ function AllProjects() {
 
             <div className="container-fluid" style={{ marginTop: '120px', minHeight: '100vh', paddingBottom: '60px' }}>
                 <div className="text-center mb-5">
-                    <h1 id="titre_projets">TOUTES MES RÉALISATIONS</h1>
+                    <div>
+                        <Link to="/#projets_experiences" className="btn-back">
+                            <i className="fa-solid fa-arrow-left-long"></i>
+                            <span>Retour au portfolio</span>
+                        </Link>
+                    </div>
+                    <h1 id="titre_projets" style={{ marginTop: '15px' }}>TOUTES MES RÉALISATIONS</h1>
                     <p className="text-muted fs-4">Une collection complète de mes travaux</p>
                 </div>
 
