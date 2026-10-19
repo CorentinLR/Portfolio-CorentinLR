@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import AllProjects from './components/AllProjects';
 import ScrollToTop from './components/ScrollToTop';
+import ScrollProgress from './components/ScrollProgress';
 
 // Helper to scroll top on navigation
 function ScrollComponent() {
@@ -13,6 +14,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <ScrollProgress />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projets" element={<AllProjects />} />

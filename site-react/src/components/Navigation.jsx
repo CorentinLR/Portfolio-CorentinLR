@@ -66,7 +66,7 @@ function Navigation() {
                         <h1>RÉALISATIONS</h1>
                     </Link>
                     <Link className="menu fs-1 fs-md-2 fs-sm-3" to="/#savoir_faire" onClick={closeMenu}>
-                        <h1>SAVOIR FAIRE</h1>
+                        <h1>COMPÉTENCES</h1>
                     </Link>
                     <Link className="menu fs-1 fs-md-2 fs-sm-3" to="/#parcours" onClick={closeMenu}>
                         <h1>PARCOURS</h1>

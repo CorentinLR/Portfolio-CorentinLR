@@ -2,61 +2,72 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 function Experience() {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.3
-            }
+    const experiencesList = [
+        {
+            year: "2026",
+            type: "Stage Professionnel",
+            company: "Startup Aerosolution",
+            role: "Chargé de Communication et Marketing",
+            description: "Conception de supports graphiques, stratégie de communication multicanale et valorisation de l'identité de marque.",
+            skills: ["Stratégie digitale", "Création graphique", "Marketing B2B", "Contenus visuels"]
+        },
+        {
+            year: "2026",
+            type: "Emploi Saisonnier",
+            company: "Mediaposte",
+            role: "Agent de production en centre de tri",
+            description: "Gestion du flux logistique, tri mécanisé et manuel à cadence soutenue avec respect strict des procédures de qualité.",
+            skills: ["Organisation", "Rigueur", "Travail en équipe", "Gestion du rythme"]
+        },
+        {
+            year: "2024",
+            type: "Emploi Saisonnier",
+            company: "Agent de courrier & logistique",
+            role: "Tri et livraison de colis",
+            description: "Distribution autonome et contact usager, respect des délais de livraison et sens des responsabilités sur le terrain.",
+            skills: ["Autonomie", "Sens du service", "Efficacité opérationnelle"]
         }
-    };
-
-    const itemVariants = {
-        hidden: { y: 20, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                type: "spring",
-                stiffness: 100
-            }
-        }
-    };
+    ];
 
     return (
         <div className="container_experience" id="experiences">
-            <div className="heading">
-                <h1 id="titre_experiences">Expériences Professionnelles</h1>
+            <div className="section-header">
+                <div className="section-tag">
+                    <span className="section-tag-num">05</span>
+                    <span className="section-tag-sep">//</span>
+                    <span className="section-tag-name">MONDE DU TRAVAIL</span>
+                </div>
+                <h1 className="section-main-title" id="titre_experiences">EXPÉRIENCES PROFESSIONNELLES</h1>
+                <p className="section-description">
+                    Des missions et engagements concrets qui ont forgé mon autonomie, ma rigueur et mon sens de l'organisation.
+                </p>
             </div>
-            <motion.div
-                className="experiences"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-            >
-                <motion.div className="experience-card" variants={itemVariants}>
-                    <div className="card-decoration"></div>
-                    <div className="date-badge">2026</div>
-                    <h2 className="experience-title">Stage professionnel - Startup Aerosolution</h2>
-                    <p className="experience-description">Chargé de Communication et Marketing.</p>
-                </motion.div>
 
-                <motion.div className="experience-card" variants={itemVariants}>
-                    <div className="card-decoration"></div>
-                    <div className="date-badge">2026</div>
-                    <h2 className="experience-title">Emploi saisonnier - Mediaposte</h2>
-                    <p className="experience-description">Agent de production dans un centre de tri.</p>
-                </motion.div>
-
-                <motion.div className="experience-card" variants={itemVariants}>
-                    <div className="card-decoration"></div>
-                    <div className="date-badge">2024</div>
-                    <h2 className="experience-title">Emploi saisonnier - Agent de courrier</h2>
-                    <p className="experience-description">Tri et livraison de colis. Travail d'équipe.</p>
-                </motion.div>
-            </motion.div>
+            <div className="studio-experience-grid">
+                {experiencesList.map((exp, index) => (
+                    <motion.div
+                        key={index}
+                        className="studio-experience-card"
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.5, delay: index * 0.15 }}
+                    >
+                        <div className="exp-card-header">
+                            <span className="exp-year-badge">{exp.year}</span>
+                            <span className="exp-type-tag">{exp.type}</span>
+                        </div>
+                        <h3 className="exp-company">{exp.company}</h3>
+                        <h4 className="exp-role">{exp.role}</h4>
+                        <p className="exp-description">{exp.description}</p>
+                        <div className="exp-skills-row">
+                            {exp.skills.map((s, idx) => (
+                                <span key={idx} className="exp-skill-pill">{s}</span>
+                            ))}
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
         </div>
     );
 }

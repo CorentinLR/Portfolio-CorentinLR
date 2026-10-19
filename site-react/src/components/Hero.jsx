@@ -45,7 +45,7 @@ const Hero = () => {
                     <img src={import.meta.env.BASE_URL + "image/bannière_carousel-modified.png"} alt="Réalisations" />
                 </div>
                 <div className="hero-bg" data-index="1">
-                    <img src={import.meta.env.BASE_URL + "image/montage_background_caroussel.webp"} alt="Savoir-Faire" />
+                    <img src={import.meta.env.BASE_URL + "image/montage_background_caroussel.webp"} alt="Compétences" />
                 </div>
                 <div className="hero-bg" data-index="2">
                     <img src={import.meta.env.BASE_URL + "image/iut.jpeg"} alt="Parcours" />
@@ -73,7 +73,7 @@ const Hero = () => {
                 <div className="text-section" data-target="1">
                     <div className="text-content">
                         <a href="#savoir_faire" className="hero-link-title" onClick={(e) => scrollToSection(e, 'savoir_faire')}>
-                            <h1 className="titre_caroussel">Mon Savoir-faire</h1>
+                            <h1 className="titre_caroussel">Mes compétences</h1>
                         </a>
 
                         <p className="contenu_caroussel">
