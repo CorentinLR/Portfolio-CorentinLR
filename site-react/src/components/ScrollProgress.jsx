@@ -49,23 +49,37 @@ function ScrollProgress() {
 
             // 1. Calculate percentage
             if (maxScroll <= 0) {
-                setProgress(0);
+                setProgress(location.pathname === '/' ? 12 : 0);
             } else {
                 const heroSection = document.getElementById('hero-scrolly');
-                if (scrollY === 0 && heroSection) {
-                    const heroMax = heroSection.scrollHeight - heroSection.clientHeight;
-                    if (heroMax > 0) {
-                        const heroRatio = heroSection.scrollTop / heroMax;
-                        // Hero internal scroll occupies first 12%
-                        setProgress(Math.min(12, Math.round(heroRatio * 12)));
+                const isHeroHidden = !heroSection || heroSection.classList.contains('hero-hidden') || heroSection.clientHeight === 0;
+
+                if (location.pathname === '/') {
+                    if (!isHeroHidden && scrollY === 0 && heroSection) {
+                        const heroMax = heroSection.scrollHeight - heroSection.clientHeight;
+                        if (heroMax > 0) {
+                            const heroRatio = heroSection.scrollTop / heroMax;
+                            // Hero internal scroll occupies first 12% (0% to 12%)
+                            setProgress(Math.min(12, Math.round(heroRatio * 12)));
+                        } else {
+                            setProgress(0);
+                        }
+                    } else if (scrollY + windowHeight >= scrollHeight - 30) {
+                        setProgress(100);
                     } else {
-                        setProgress(0);
+                        // Beyond hero or hero is hidden: scale smoothly from 12% to 100%
+                        const ratio = Math.min(1, Math.max(0, scrollY / maxScroll));
+                        const calculated = Math.round(12 + ratio * (100 - 12));
+                        setProgress(Math.min(100, Math.max(12, calculated)));
                     }
-                } else if (scrollY + windowHeight >= scrollHeight - 30) {
-                    setProgress(100);
                 } else {
-                    const calculated = Math.round((scrollY / maxScroll) * 100);
-                    setProgress(Math.min(100, Math.max(0, calculated)));
+                    // Non-homepage routes (e.g. /projets)
+                    if (scrollY + windowHeight >= scrollHeight - 30) {
+                        setProgress(100);
+                    } else {
+                        const calculated = Math.round((scrollY / maxScroll) * 100);
+                        setProgress(Math.min(100, Math.max(0, calculated)));
+                    }
                 }
             }
 
@@ -76,7 +90,10 @@ function ScrollProgress() {
                     return;
                 }
 
-                if (scrollY < 120) {
+                const heroSection = document.getElementById('hero-scrolly');
+                const isHeroHidden = !heroSection || heroSection.classList.contains('hero-hidden') || heroSection.clientHeight === 0;
+
+                if (!isHeroHidden && scrollY < 120) {
                     setActiveSectionId('hero-scrolly');
                     return;
                 }
@@ -98,6 +115,8 @@ function ScrollProgress() {
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('showHero', handleScroll);
+        window.addEventListener('hideHero', handleScroll);
 
         // Also listen to internal hero carousel scroll
         const heroSection = document.getElementById('hero-scrolly');
@@ -109,6 +128,8 @@ function ScrollProgress() {
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('showHero', handleScroll);
+            window.removeEventListener('hideHero', handleScroll);
             if (heroSection) {
                 heroSection.removeEventListener('scroll', handleScroll);
             }
@@ -141,10 +162,12 @@ function ScrollProgress() {
         }
 
         if (id === 'hero-scrolly') {
+            window.dispatchEvent(new CustomEvent('showHero'));
             window.scrollTo({ top: 0, behavior: 'smooth' });
             const hero = document.getElementById('hero-scrolly');
             if (hero) hero.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
+            window.dispatchEvent(new CustomEvent('hideHero'));
             const el = document.getElementById(id);
             if (el) {
                 el.scrollIntoView({ behavior: 'smooth' });

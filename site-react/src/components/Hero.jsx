@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 
-const Hero = () => {
+const Hero = ({ isHeroVisible = true, onHideHero }) => {
     const heroRef = useRef(null);
-
 
     useEffect(() => {
         // === SCROLLYTELLING LOGIC INTEGRATED HERE ===
-        const heroSection = document.getElementById('hero-scrolly');
-        const textSections = document.querySelectorAll('.text-section');
-        const bgImages = document.querySelectorAll('.hero-bg');
+        const heroSection = heroRef.current;
+        if (!heroSection) return;
+
+        const textSections = heroSection.querySelectorAll('.text-section');
+        const bgImages = heroSection.querySelectorAll('.hero-bg');
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -29,17 +30,61 @@ const Hero = () => {
         return () => observer.disconnect();
     }, []);
 
+    // Scroll down to leave hero when at bottom of carousel
+    useEffect(() => {
+        const heroSection = heroRef.current;
+        if (!heroSection) return;
+
+        let touchStartY = 0;
+
+        const handleHeroWheel = (e) => {
+            const isAtBottom = heroSection.scrollTop + heroSection.clientHeight >= heroSection.scrollHeight - 30;
+            if (e.deltaY > 15 && isAtBottom) {
+                if (onHideHero) onHideHero();
+            }
+        };
+
+        const handleHeroTouchStart = (e) => {
+            touchStartY = e.touches[0].clientY;
+        };
+
+        const handleHeroTouchMove = (e) => {
+            const touchY = e.touches[0].clientY;
+            const diff = touchStartY - touchY; // positive = swipe up (scroll down)
+            const isAtBottom = heroSection.scrollTop + heroSection.clientHeight >= heroSection.scrollHeight - 30;
+            if (diff > 40 && isAtBottom) {
+                if (onHideHero) onHideHero();
+            }
+        };
+
+        heroSection.addEventListener('wheel', handleHeroWheel, { passive: true });
+        heroSection.addEventListener('touchstart', handleHeroTouchStart, { passive: true });
+        heroSection.addEventListener('touchmove', handleHeroTouchMove, { passive: true });
+
+        return () => {
+            heroSection.removeEventListener('wheel', handleHeroWheel);
+            heroSection.removeEventListener('touchstart', handleHeroTouchStart);
+            heroSection.removeEventListener('touchmove', handleHeroTouchMove);
+        };
+    }, [onHideHero]);
+
     const scrollToSection = (e, id) => {
         e.preventDefault();
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (onHideHero) onHideHero();
+        setTimeout(() => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 120);
     };
 
     return (
-        <div id="hero-scrolly">
-
+        <div
+            id="hero-scrolly"
+            ref={heroRef}
+            className={isHeroVisible ? '' : 'hero-hidden'}
+        >
             <div id="hero-backgrounds">
                 <div className="hero-bg active" data-index="0">
                     <img src={import.meta.env.BASE_URL + "image/bannière_carousel-modified.png"} alt="Réalisations" />
@@ -106,6 +151,6 @@ const Hero = () => {
 
         </div>
     );
-}
+};
 
 export default Hero;

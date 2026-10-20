@@ -109,6 +109,15 @@ function MiniBio() {
 
     return (
         <div className="container-fluid p-md-5 p-3 text-dark" id="mini_bio">
+            <button
+                type="button"
+                className="hero-reappear-pill"
+                onClick={() => window.dispatchEvent(new CustomEvent('showHero'))}
+                title="Revoir l'introduction"
+            >
+                <i className="fa-solid fa-rotate-left"></i>
+                <span>Revoir l'introduction</span>
+            </button>
             <div className="section-header">
                 <div className="section-tag">
                     <span className="section-tag-num">01</span>
