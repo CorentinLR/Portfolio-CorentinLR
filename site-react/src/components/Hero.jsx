@@ -149,6 +149,17 @@ const Hero = ({ isHeroVisible = true, onHideHero }) => {
 
             </div>
 
+            {/* Bouton passer au contenu / explorer (mobile friendly) */}
+            <button
+                type="button"
+                className="hero-skip-pill"
+                onClick={(e) => scrollToSection(e, 'mini_bio')}
+                aria-label="Passer directement au profil"
+            >
+                <span>Découvrir</span>
+                <i className="fa-solid fa-chevron-down"></i>
+            </button>
+
         </div>
     );
 };

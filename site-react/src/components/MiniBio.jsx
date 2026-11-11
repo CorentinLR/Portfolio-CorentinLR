@@ -156,8 +156,8 @@ function MiniBio() {
                                 const rad = (item.angle * Math.PI) / 180;
                                 const tx = Math.round(Math.cos(rad) * item.distance);
                                 const ty = Math.round(Math.sin(rad) * item.distance);
-                                const txMobile = Math.round(Math.cos(rad) * (item.distance * 0.72));
-                                const tyMobile = Math.round(Math.sin(rad) * (item.distance * 0.72));
+                                const txMobile = Math.round(Math.cos(rad) * (item.distance * 0.48));
+                                const tyMobile = Math.round(Math.sin(rad) * (item.distance * 0.48));
 
                                 return (
                                     <div
@@ -186,7 +186,8 @@ function MiniBio() {
 
                         {/* Indication discrète */}
                         <div className="bio-hover-hint">
-                            <span>✨ Survolez-moi</span>
+                            <span className="hint-desktop">✨ Survolez-moi</span>
+                            <span className="hint-mobile">✨ Touchez la photo</span>
                         </div>
                     </div>
                 </div>

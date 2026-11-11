@@ -182,80 +182,80 @@ function AllProjects() {
         <>
             <Navigation />
 
-            <div className="container-fluid" style={{ marginTop: '120px', minHeight: '100vh', paddingBottom: '60px' }}>
-                <div className="text-center mb-5">
+            <div className="container-fluid all-projects-container">
+                <div className="text-center mb-4">
                     <div>
                         <Link to="/#projets_experiences" className="btn-back">
                             <i className="fa-solid fa-arrow-left-long"></i>
                             <span>Retour au portfolio</span>
                         </Link>
                     </div>
-                    <h1 id="titre_projets" style={{ marginTop: '15px' }}>TOUTES MES RÉALISATIONS</h1>
-                    <p className="text-muted fs-4">Une collection complète de mes travaux</p>
+                    <h1 id="titre_projets" className="all-projects-title">TOUTES MES RÉALISATIONS</h1>
+                    <p className="text-muted all-projects-subtitle">Une collection complète de mes travaux</p>
                 </div>
 
                 {/* Filters */}
-                <div className="d-flex justify-content-center gap-3 mb-5 flex-wrap">
+                <div className="all-projects-filter-bar mb-4">
                     <button
-                        className={`btn ${filter === 'all' ? 'btn-primary' : 'btn-outline-primary'}`}
+                        type="button"
+                        className={`all-projects-filter-btn ${filter === 'all' ? 'active' : ''}`}
                         onClick={() => setFilter('all')}
-                        style={{ borderRadius: '50px', padding: '10px 30px' }}
                     >
                         Tout
                     </button>
                     <button
-                        className={`btn ${filter === 'dev' ? 'btn-primary' : 'btn-outline-primary'}`}
+                        type="button"
+                        className={`all-projects-filter-btn ${filter === 'dev' ? 'active' : ''}`}
                         onClick={() => setFilter('dev')}
-                        style={{ borderRadius: '50px', padding: '10px 30px' }}
                     >
                         Développement Web
                     </button>
                     <button
-                        className={`btn ${filter === 'av' ? 'btn-primary' : 'btn-outline-primary'}`}
+                        type="button"
+                        className={`all-projects-filter-btn ${filter === 'av' ? 'active' : ''}`}
                         onClick={() => setFilter('av')}
-                        style={{ borderRadius: '50px', padding: '10px 30px' }}
                     >
                         Audiovisuel
                     </button>
                     <button
-                        className={`btn ${filter === 'graphisme' ? 'btn-primary' : 'btn-outline-primary'}`}
+                        type="button"
+                        className={`all-projects-filter-btn ${filter === 'graphisme' ? 'active' : ''}`}
                         onClick={() => setFilter('graphisme')}
-                        style={{ borderRadius: '50px', padding: '10px 30px' }}
                     >
                         Graphisme
                     </button>
                     <button
-                        className={`btn ${filter === 'communication' ? 'btn-primary' : 'btn-outline-primary'}`}
+                        type="button"
+                        className={`all-projects-filter-btn ${filter === 'communication' ? 'active' : ''}`}
                         onClick={() => setFilter('communication')}
-                        style={{ borderRadius: '50px', padding: '10px 30px' }}
                     >
                         Communication
                     </button>
                     <button
-                        className={`btn ${filter === 'uxui' ? 'btn-primary' : 'btn-outline-primary'}`}
+                        type="button"
+                        className={`all-projects-filter-btn ${filter === 'uxui' ? 'active' : ''}`}
                         onClick={() => setFilter('uxui')}
-                        style={{ borderRadius: '50px', padding: '10px 30px' }}
                     >
                         UX/UI
                     </button>
                     <button
-                        className={`btn ${filter === '3d' ? 'btn-primary' : 'btn-outline-primary'}`}
+                        type="button"
+                        className={`all-projects-filter-btn ${filter === '3d' ? 'active' : ''}`}
                         onClick={() => setFilter('3d')}
-                        style={{ borderRadius: '50px', padding: '10px 30px' }}
                     >
                         Création 3D
                     </button>
                     <button
-                        className={`btn ${filter === 'ecriture' ? 'btn-primary' : 'btn-outline-primary'}`}
+                        type="button"
+                        className={`all-projects-filter-btn ${filter === 'ecriture' ? 'active' : ''}`}
                         onClick={() => setFilter('ecriture')}
-                        style={{ borderRadius: '50px', padding: '10px 30px' }}
                     >
                         Écriture
                     </button>
                     <button
-                        className={`btn ${filter === 'gestion' ? 'btn-primary' : 'btn-outline-primary'}`}
+                        type="button"
+                        className={`all-projects-filter-btn ${filter === 'gestion' ? 'active' : ''}`}
                         onClick={() => setFilter('gestion')}
-                        style={{ borderRadius: '50px', padding: '10px 30px' }}
                     >
                         Gestion de Projet
                     </button>

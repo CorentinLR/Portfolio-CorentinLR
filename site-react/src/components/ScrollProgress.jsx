@@ -146,10 +146,12 @@ function ScrollProgress() {
 
         if (isMenuOpen) {
             document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('touchstart', handleClickOutside);
         }
 
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
         };
     }, [isMenuOpen]);
 
@@ -186,103 +188,134 @@ function ScrollProgress() {
     const activeTagTop = `${(13 + (safeActiveIndex / (HOME_SECTIONS.length - 1)) * 214).toFixed(1)}px`;
 
     return (
-        <div
-            ref={dockRef}
-            className={`scroll-progress-right-dock ${isIntroActive ? 'hidden-intro' : ''}`}
-        >
-            {/* Badge Pourcentage cliquable */}
-            <button
-                type="button"
-                className="scroll-progress-right-badge"
-                onClick={() => setIsMenuOpen(prev => !prev)}
-                title="Cliquer pour afficher toutes les sections"
-                aria-label={`Progression : ${progress}%. Cliquez pour voir les sections.`}
-            >
-                <span className="badge-percent">{progress}%</span>
-            </button>
+        <>
+            {/* Fine barre de progression tout en haut */}
+            <div
+                className={`scroll-top-progress-bar ${isIntroActive ? 'hidden-intro' : ''}`}
+                style={{ width: `${progress}%` }}
+                aria-hidden="true"
+            />
 
-            {/* Rail vertical avec les étapes de sections */}
-            <div className="scroll-progress-vertical-rail">
-                {/* Piste de fond qui relie les points : ne dépasse ni en haut ni en bas */}
-                <div className="scroll-rail-line-track">
-                    <div
-                        className="scroll-rail-progress-bar"
-                        style={{
-                            height: `${(safeActiveIndex / (HOME_SECTIONS.length - 1)) * 100}%`
-                        }}
-                    />
-                </div>
-
-                {/* Points de chaque grande section */}
-                {location.pathname === '/' && HOME_SECTIONS.map((sec, index) => {
-                    const isActive = activeSectionId === sec.id;
-                    const isPassed = activeIndex >= index;
-
-                    return (
-                        <div
-                            key={sec.id}
-                            className={`scroll-rail-item ${isActive ? 'active' : ''} ${isPassed ? 'passed' : ''}`}
-                            onClick={() => handleSelectSection(sec.id)}
-                        >
-                            {/* Pastille / Point plein */}
-                            <div className="scroll-rail-dot" />
-
-                            {/* Étiquette du grand titre (glisse vers la gauche) */}
-                            <div className="scroll-rail-tooltip">
-                                <i className={`fa-solid ${sec.icon}`} aria-hidden="true"></i>
-                                <span>{sec.name}</span>
-                            </div>
-                        </div>
-                    );
-                })}
-
-                {/* Pilule du grand titre actuel (se place dynamiquement à côté du point actif) */}
-                <div
-                    className={`scroll-progress-active-tag ${isMenuOpen ? 'menu-open' : ''}`}
-                    style={{ top: activeTagTop }}
-                    onClick={() => setIsMenuOpen(prev => !prev)}
-                    title="Section actuelle - Cliquer pour ouvrir le menu des sections"
-                >
-                    <i className={`fa-solid ${currentSection.icon}`} aria-hidden="true"></i>
-                    <span className="tag-text">{currentSection.name}</span>
-                    <i className="fa-solid fa-arrow-right active-tag-arrow" aria-hidden="true"></i>
-                </div>
-            </div>
-
-            {/* Menu déroulant latéral complet des grands titres */}
+            {/* Backdrop semi-transparent pour fermer le menu au clic extérieur */}
             {isMenuOpen && (
-                <div className="scroll-progress-side-menu">
-                    <div className="side-menu-header">
-                        <span>SECTIONS DU SITE</span>
-                        <span className="side-menu-progress">{progress}% VU</span>
-                    </div>
-                    <ul className="side-menu-list">
-                        {HOME_SECTIONS.map((sec) => {
-                            const isActive = activeSectionId === sec.id && location.pathname === '/';
-                            return (
-                                <li
-                                    key={sec.id}
-                                    className={`side-menu-item ${isActive ? 'active' : ''}`}
-                                    onClick={() => handleSelectSection(sec.id)}
-                                >
-                                    <div className="side-menu-left">
-                                        <i className={`fa-solid ${sec.icon}`} aria-hidden="true"></i>
-                                        <span>{sec.name}</span>
-                                    </div>
-                                    <div className="side-menu-right">
-                                        {isActive ? (
-                                            <span className="side-menu-active-badge">Actuel</span>
-                                        ) : (
-                                            <i className="fa-solid fa-chevron-right side-menu-arrow"></i>
-                                        )}
-                                    </div>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
+                <div
+                    className="scroll-progress-backdrop"
+                    onClick={() => setIsMenuOpen(false)}
+                    aria-hidden="true"
+                />
             )}
-        </div>
+
+            <div
+                ref={dockRef}
+                className={`scroll-progress-right-dock ${isIntroActive ? 'hidden-intro' : ''}`}
+            >
+                {/* Badge Pourcentage cliquable */}
+                <button
+                    type="button"
+                    className="scroll-progress-right-badge"
+                    onClick={() => setIsMenuOpen(prev => !prev)}
+                    title="Cliquer pour afficher toutes les sections"
+                    aria-label={`Progression : ${progress}%. Cliquez pour voir les sections.`}
+                >
+                    <span className="badge-percent">{progress}%</span>
+                    <span className="badge-mobile-icon" aria-hidden="true">
+                        <i className="fa-solid fa-bars-staggered"></i>
+                    </span>
+                </button>
+
+                {/* Rail vertical avec les étapes de sections */}
+                <div className="scroll-progress-vertical-rail">
+                    {/* Piste de fond qui relie les points : ne dépasse ni en haut ni en bas */}
+                    <div className="scroll-rail-line-track">
+                        <div
+                            className="scroll-rail-progress-bar"
+                            style={{
+                                height: `${(safeActiveIndex / (HOME_SECTIONS.length - 1)) * 100}%`
+                            }}
+                        />
+                    </div>
+
+                    {/* Points de chaque grande section */}
+                    {location.pathname === '/' && HOME_SECTIONS.map((sec, index) => {
+                        const isActive = activeSectionId === sec.id;
+                        const isPassed = activeIndex >= index;
+
+                        return (
+                            <div
+                                key={sec.id}
+                                className={`scroll-rail-item ${isActive ? 'active' : ''} ${isPassed ? 'passed' : ''}`}
+                                onClick={() => handleSelectSection(sec.id)}
+                            >
+                                {/* Pastille / Point plein */}
+                                <div className="scroll-rail-dot" />
+
+                                {/* Étiquette du grand titre (glisse vers la gauche) */}
+                                <div className="scroll-rail-tooltip">
+                                    <i className={`fa-solid ${sec.icon}`} aria-hidden="true"></i>
+                                    <span>{sec.name}</span>
+                                </div>
+                            </div>
+                        );
+                    })}
+
+                    {/* Pilule du grand titre actuel (se place dynamiquement à côté du point actif) */}
+                    <div
+                        className={`scroll-progress-active-tag ${isMenuOpen ? 'menu-open' : ''}`}
+                        style={{ top: activeTagTop }}
+                        onClick={() => setIsMenuOpen(prev => !prev)}
+                        title="Section actuelle - Cliquer pour ouvrir le menu des sections"
+                    >
+                        <i className={`fa-solid ${currentSection.icon}`} aria-hidden="true"></i>
+                        <span className="tag-text">{currentSection.name}</span>
+                        <i className="fa-solid fa-arrow-right active-tag-arrow" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                {/* Menu déroulant complet des grands titres */}
+                {isMenuOpen && (
+                    <div className="scroll-progress-side-menu">
+                        <div className="side-menu-header">
+                            <div className="d-flex align-items-center gap-2">
+                                <span>SECTIONS DU SITE</span>
+                                <span className="side-menu-progress">{progress}% VU</span>
+                            </div>
+                            <button
+                                type="button"
+                                className="side-menu-close-btn"
+                                onClick={() => setIsMenuOpen(false)}
+                                aria-label="Fermer le menu des sections"
+                            >
+                                <i className="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <ul className="side-menu-list">
+                            {HOME_SECTIONS.map((sec) => {
+                                const isActive = activeSectionId === sec.id && location.pathname === '/';
+                                return (
+                                    <li
+                                        key={sec.id}
+                                        className={`side-menu-item ${isActive ? 'active' : ''}`}
+                                        onClick={() => handleSelectSection(sec.id)}
+                                    >
+                                        <div className="side-menu-left">
+                                            <i className={`fa-solid ${sec.icon}`} aria-hidden="true"></i>
+                                            <span>{sec.name}</span>
+                                        </div>
+                                        <div className="side-menu-right">
+                                            {isActive ? (
+                                                <span className="side-menu-active-badge">Actuel</span>
+                                            ) : (
+                                                <i className="fa-solid fa-chevron-right side-menu-arrow"></i>
+                                            )}
+                                        </div>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                )}
+            </div>
+        </>
     );
 }
 
